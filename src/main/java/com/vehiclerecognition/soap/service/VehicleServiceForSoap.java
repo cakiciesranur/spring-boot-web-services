@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static com.vehiclerecognition.soap.dto.VehicleClass.*;
+
 @Service
 public class VehicleServiceForSoap implements IVehicleServiceForSoap {
     private static final Logger logger = LogManager.getLogger(VehicleService.class);
@@ -154,17 +156,19 @@ public class VehicleServiceForSoap implements IVehicleServiceForSoap {
             return null;
         }
 
-        if ("Otomobil".equalsIgnoreCase(vehicleType) || "Otomobil".contains(vehicleType)) {
-            return VehicleClass.CAR;
+        VehicleClass vehicleClass = VehicleClass.fromValue(vehicleType);
+
+        if (CAR.equals(vehicleClass) || CAR.value().contains(vehicleType)) {
+            return CAR;
         }
-        if ("Otobüs".equalsIgnoreCase(vehicleType) || "Otobüs".contains(vehicleType)) {
-            return VehicleClass.BUS;
+        if (BUS.equals(vehicleClass) || BUS.value().contains(vehicleType)) {
+            return BUS;
         }
-        if ("Arazi,SUV&Pick-up".equalsIgnoreCase(vehicleType) || "Arazi,SUV&Pick-up".contains(vehicleType)) {
-            return VehicleClass.SUV;
+        if (SUV.equals(vehicleClass) || SUV.value().contains(vehicleType)) {
+            return SUV;
         }
-        if ("Kamyon&Kamyonet".equalsIgnoreCase(vehicleType) || "Kamyon&Kamyonet".contains(vehicleType)) {
-            return VehicleClass.TRUCK;
+        if (TRUCK.equals(vehicleClass) || TRUCK.value().contains(vehicleType)) {
+            return TRUCK;
         }
 
         return null;
