@@ -1,0 +1,72 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://vehiclerecognition.com/soap/dto"
+           targetNamespace="http://vehiclerecognition.com/soap/dto"
+           elementFormDefault="qualified">
+
+    <xs:element name="searchKeyRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="key" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="searchKeyResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="vehicleList" type="tns:vehicle" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="searchCriteriaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="brand" type="xs:string" minOccurs="0"/>
+                <xs:element name="model" type="xs:string" minOccurs="0"/>
+                <xs:element name="vehicleClass" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="searchCriteriaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="vehicleList" type="tns:vehicle" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="vehicle">
+        <xs:sequence>
+            <xs:element name="brand" type="xs:string"/>
+            <xs:element name="model" type="xs:string"/>
+            <xs:element name="vehicleClass" type="tns:vehicleClass"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="vehicleClass">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CAR">
+                <xs:annotation>
+                    <xs:documentation>Otomobil</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BUS">
+                <xs:annotation>
+                    <xs:documentation>Otobüs</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SUV">
+                <xs:annotation>
+                    <xs:documentation>Arazi,SUV,Pick-up</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TRUCK">
+                <xs:annotation>
+                    <xs:documentation>Kamyon,Kamyonet</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
